@@ -13,6 +13,7 @@ likelihoods of those samples.
 
 """
 
+
 def gaussian_likelihood(x, mu, log_std):
     """
     Args:
@@ -23,15 +24,14 @@ def gaussian_likelihood(x, mu, log_std):
     Returns:
         Tensor with shape [batch]
     """
-    #######################
-    #                     #
-    #   YOUR CODE HERE    #
-    #                     #
-    #######################
-    return torch.zeros(1)
+    diff = x - mu
+    summand = (
+        diff * diff / torch.exp(2.0 * log_std) + 2.0 * log_std + np.log(2.0 * np.pi)
+    )
+    return -0.5 * summand.sum(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """
     Run this file to verify your solution.
     """
